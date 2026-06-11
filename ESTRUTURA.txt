@@ -1,0 +1,24 @@
+Assets/
+├── _Project/
+│   ├── Animations/
+│   ├── Audio/
+│   │   ├── Music/
+│   │   └── SFX/
+│   ├── Prefabs/
+│   │   ├── Creatures/
+│   │   ├── Projectiles/
+│   │   └── UI/
+│   ├── RunTimeCode/
+│   │   ├── Data/            <-- Classes de Dados, DTOs e Enums
+│   │   ├── Systems/         <-- Core do Clicker, IVs, Estados e Salvamento
+│   │   └── Simulation/      <-- IA de Torres, Spatial Hash e Logica TD
+│   ├── ScriptableObjects/
+│   │   ├── Biomes/
+│   │   ├── Creatures/
+│   │   └── Habilidades/
+│   └── UI/
+│       ├── MainMenu/
+│       ├── Triage/
+│       └── GameplayTD/
+└── Plugins/
+    └── NewtonsoftJson/
