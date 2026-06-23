@@ -108,7 +108,7 @@ namespace GameCore.Systems
             List<EnemyController> atingidos = EnemyManager.Instance.QueryInRadius(alvo.transform.position, raioSalto);
             int contagem = 0;
             
-            foreach (var inimigo em atingidos)
+            foreach (var inimigo in atingidos)
             {
                 if (contagem >= (int)maxAlvos) break;
                 inimigo.ReceberDano(danoBase, ElementType.Trovao);
@@ -157,7 +157,7 @@ namespace GameCore.Systems
             {
                 _tickTimer = 0f;
                 var inimigos = EnemyManager.Instance.QueryInRadius(transform.position, _raio);
-                foreach (var inv em inimigos)
+                foreach (var inv in inimigos)
                 {
                     inv.ReceberDano(_danoTick, ElementType.Veneno);
                 }

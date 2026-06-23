@@ -73,8 +73,6 @@ namespace GameCore.Systems
                 ID_Especie = "esp_dragao_fogo"
             };
 
-            int custoEnergia = ObterCustoEnergia(raridadeSorteada);
-            
             // Cria a barra de resistência de acordo com a mecânica do Gacha Clicker
             _barraResistenciaAtual = new ResistanceBar(raridadeSorteada);
         }
@@ -167,7 +165,7 @@ namespace GameCore.Systems
         // Controle do multiplicador de combos consecutivos
         private float _ultimoCliqueTime;
         private int _contadorCombo;
-        private const float JanelaCombo = 0.5s;
+        private const float JanelaCombo = 0.5f;
 
         public ResistanceBar(RarityType raridade)
         {
@@ -187,17 +185,17 @@ namespace GameCore.Systems
                 case RarityType.Raro:
                     _hpMaximo = 30f;
                     _decaimentoPorSegundo = 0.08f * _hpMaximo; // 8% por seg
-                    _tempoLimite = 15s;
+                    _tempoLimite = 15f;
                     break;
                 case RarityType.Epico:
                     _hpMaximo = 60f;
                     _decaimentoPorSegundo = 0.12f * _hpMaximo; // 12% por seg
-                    _tempoLimite = 12s;
+                    _tempoLimite = 12f;
                     break;
                 case RarityType.Lendario:
                     _hpMaximo = 100f;
                     _decaimentoPorSegundo = 0.18f * _hpMaximo; // 18% por seg
-                    _tempoLimite = 10s;
+                    _tempoLimite = 10f;
                     break;
             }
             _hpAtual = _hpMaximo;

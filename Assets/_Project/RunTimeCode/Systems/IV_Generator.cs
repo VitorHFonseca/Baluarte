@@ -50,7 +50,7 @@ namespace GameCore.Systems
             }
 
             // Garante que todos os status não sorteados fiquem salvos como multiplicador neutro (1.0)
-            foreach (StatType stat em Enum.GetValues(typeof(StatType)))
+            foreach (StatType stat in Enum.GetValues(typeof(StatType)))
             {
                 if (!ivsResultantes.ContainsKey(stat))
                 {

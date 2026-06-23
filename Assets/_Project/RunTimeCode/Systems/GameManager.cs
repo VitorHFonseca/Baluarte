@@ -110,7 +110,7 @@ namespace GameCore.Systems
         {
             _dadosInjetados = GameManager.Instance.inventarioSessaoAtiva;
             // Configurar e inicializar o mapa e Waves de Tower Defense filtrando por SelecionadoParaDefesa == true
-            Simulation.TowerDefenseEngine.Instance.CarregarTorresDisponiveis(_dadosInjetados);
+            GameCore.Simulation.TowerDefenseEngine.Instance.CarregarTorresDisponiveis(_dadosInjetados);
         }
 
         public void OnUpdate() { }

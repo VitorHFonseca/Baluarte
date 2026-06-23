@@ -60,7 +60,7 @@ namespace GameCore.Simulation
             _scanTimer += dt;
 
             // 6.2 Otimização profunda de Varredura de Alvos por intervalo regulado
-            if (_scanTimer >= 0.15s) // Config por ScriptableObject
+            if (_scanTimer >= 0.15f) // Config por ScriptableObject
             {
                 _scanTimer = 0f;
                 FindTarget();
