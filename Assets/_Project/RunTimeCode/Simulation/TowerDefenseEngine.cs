@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using UnityEngine;
 using GameCore.Data;
 using GameCore.Systems;
+using UnityEngine;
 
 namespace GameCore.Simulation
 {
@@ -13,18 +13,10 @@ namespace GameCore.Simulation
         public GameObject prefabInimigo;
     }
 
-    [CreateAssetMenu(fileName = "ConfigTD", menuName = "Sistemas/Configuração/TD")]
-    public class TowerDefenseConfig : ScriptableObject
-    {
-        public float scanIntervalGlobal = 0.15f;
-        public int maxTorresNoMapa = 10;
-        public WaveData[] waves;
-    }
-
     public class TowerDefenseEngine : MonoBehaviour
     {
         public static TowerDefenseEngine Instance { get; private set; }
-        
+
         public TowerDefenseConfig configTD;
         private List<CreatureInstance> _torresDisponiveisParaUso;
 
@@ -37,7 +29,7 @@ namespace GameCore.Simulation
         public void CarregarTorresDisponiveis(SessionInventory inventario)
         {
             _torresDisponiveisParaUso = inventario.animaisCapturados.FindAll(x => x.SelecionadoParaDefesa);
-            Debug.Log($"Engine de Combate carregada com {_torresDisponiveisParaUso.Count} criaturas prontas para ação.");
+            Debug.Log($"Engine de Combate carregada com {_torresDisponiveisParaUso.Count} criaturas prontas para acao.");
         }
     }
 }

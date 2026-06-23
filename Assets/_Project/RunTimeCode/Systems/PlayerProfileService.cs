@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using GameCore.Data;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace GameCore.Systems
@@ -35,6 +36,13 @@ namespace GameCore.Systems
             return CurrentProfile;
         }
 
+        public PlayerProfile CreateProfile(string nome, CharacterBodyType corpo, PlayerStats stats)
+        {
+            CurrentProfile = PlayerProfile.Create(nome, corpo, stats);
+            SaveProfile();
+            return CurrentProfile;
+        }
+
         public void TouchLastPlayed()
         {
             if (CurrentProfile == null) return;
@@ -47,7 +55,7 @@ namespace GameCore.Systems
         {
             if (CurrentProfile == null) return;
 
-            string json = JsonUtility.ToJson(CurrentProfile, true);
+            string json = JsonConvert.SerializeObject(CurrentProfile, Formatting.Indented);
             File.WriteAllText(SavePath, json);
         }
 
@@ -62,7 +70,7 @@ namespace GameCore.Systems
             try
             {
                 string json = File.ReadAllText(SavePath);
-                CurrentProfile = JsonUtility.FromJson<PlayerProfile>(json);
+                CurrentProfile = JsonConvert.DeserializeObject<PlayerProfile>(json);
             }
             catch (Exception ex)
             {

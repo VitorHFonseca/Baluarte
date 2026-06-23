@@ -15,10 +15,18 @@ namespace GameCore.Systems
         public float energiaCaptura = 30f;
         public float tempoGlobalRestante = 90f;
         private bool _sessaoAtiva = false;
+        private const float EnergiaInicial = 30f;
+        private const float TempoInicial = 90f;
 
         private SessionInventory _inventarioSessao;
         private ResistanceBar _barraResistenciaAtual;
         private CreatureInstance _criaturaSendoCapturada;
+        public bool SessaoAtiva => _sessaoAtiva;
+        public float EnergiaCapturaAtual => energiaCaptura;
+        public float TempoRestanteAtual => tempoGlobalRestante;
+        public int CapturadosNaSessao => _inventarioSessao?.animaisCapturados.Count ?? 0;
+        public CreatureInstance CriaturaAtual => _criaturaSendoCapturada;
+        public float ProgressoResistenciaAtual => _barraResistenciaAtual?.GetProgressoNormalizado() ?? 0f;
 
         private void Awake()
         {
@@ -28,6 +36,8 @@ namespace GameCore.Systems
 
         public void IniciarSessão()
         {
+            energiaCaptura = EnergiaInicial;
+            tempoGlobalRestante = TempoInicial;
             _inventarioSessao = new SessionInventory();
             _sessaoAtiva = true;
             SpawnProximaCriatura();

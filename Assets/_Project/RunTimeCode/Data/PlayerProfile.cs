@@ -11,36 +11,34 @@ namespace GameCore.Data
     [Serializable]
     public class PlayerStats
     {
-        public int vigor = 5;
-        public int foco = 5;
-        public int empatiaAnimal = 5;
-        public int sorte = 5;
-        public int conhecimentoArcano = 5;
+        public int vigor;
+        public int foco;
+        public int empatiaAnimal;
+        public int sorte;
+        public int conhecimentoArcano;
 
         public int Total => vigor + foco + empatiaAnimal + sorte + conhecimentoArcano;
 
         public static PlayerStats CreateDefault(CharacterBodyType bodyType)
         {
-            PlayerStats stats = new PlayerStats();
+            return CreateEmpty();
+        }
 
-            if (bodyType == CharacterBodyType.Homem)
-            {
-                stats.vigor = 6;
-                stats.foco = 5;
-                stats.empatiaAnimal = 5;
-                stats.sorte = 4;
-                stats.conhecimentoArcano = 5;
-            }
-            else
-            {
-                stats.vigor = 5;
-                stats.foco = 6;
-                stats.empatiaAnimal = 5;
-                stats.sorte = 4;
-                stats.conhecimentoArcano = 5;
-            }
+        public static PlayerStats CreateEmpty()
+        {
+            return new PlayerStats();
+        }
 
-            return stats;
+        public PlayerStats Clone()
+        {
+            return new PlayerStats
+            {
+                vigor = vigor,
+                foco = foco,
+                empatiaAnimal = empatiaAnimal,
+                sorte = sorte,
+                conhecimentoArcano = conhecimentoArcano
+            };
         }
     }
 
@@ -56,13 +54,18 @@ namespace GameCore.Data
 
         public static PlayerProfile Create(string nome, CharacterBodyType corpo)
         {
+            return Create(nome, corpo, PlayerStats.CreateDefault(corpo));
+        }
+
+        public static PlayerProfile Create(string nome, CharacterBodyType corpo, PlayerStats stats)
+        {
             string now = DateTime.UtcNow.ToString("o");
             return new PlayerProfile
             {
                 id = Guid.NewGuid().ToString(),
                 nome = string.IsNullOrWhiteSpace(nome) ? "Aprendiz" : nome.Trim(),
                 corpo = corpo,
-                stats = PlayerStats.CreateDefault(corpo),
+                stats = stats?.Clone() ?? PlayerStats.CreateEmpty(),
                 createdAtUtc = now,
                 lastPlayedAtUtc = now
             };
