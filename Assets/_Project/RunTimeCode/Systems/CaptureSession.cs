@@ -70,7 +70,7 @@ namespace GameCore.Systems
             {
                 Raridade = raridadeSorteada,
                 Elemento = elementoSorteado,
-                ID_Especie = "esp_dragao_fogo"
+                ID_Especie = "esp_dragao_fagulha"
             };
 
             // Cria a barra de resistência de acordo com a mecânica do Gacha Clicker

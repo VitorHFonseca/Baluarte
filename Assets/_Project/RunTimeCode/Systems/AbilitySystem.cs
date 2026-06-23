@@ -14,7 +14,7 @@ namespace GameCore.Systems
     {
         public static AbilitySystem Instance { get; private set; }
 
-        [SerializeField] private List<AbilityData> bancoDeDadosHabilidades;
+        [SerializeField] private List<AbilityData> bancoDeDadosHabilidades = new List<AbilityData>();
         private Dictionary<string, AbilityData> _mapaHabilidades = new Dictionary<string, AbilityData>();
         private Dictionary<string, IAbilityEffect> _implementacoesEfeitos = new Dictionary<string, IAbilityEffect>();
 
@@ -25,7 +25,8 @@ namespace GameCore.Systems
 
             foreach (var hab in bancoDeDadosHabilidades)
             {
-                _mapaHabilidades.Add(hab.idPoder, hab);
+                if (hab == null || string.IsNullOrWhiteSpace(hab.idPoder)) continue;
+                _mapaHabilidades[hab.idPoder] = hab;
             }
 
             RegistrarImplementacoesEfeitos();
@@ -33,6 +34,7 @@ namespace GameCore.Systems
 
         private void RegistrarImplementacoesEfeitos()
         {
+            _implementacoesEfeitos.Add("BolaDeFogo", new DirectDamageEffect(ElementType.Fogo));
             _implementacoesEfeitos.Add("ExplosaoEmCadeia", new ChainLightningEffect());
             _implementacoesEfeitos.Add("NuvemToxica", new PoisonCloudEffect());
             // Demais mapeamentos de efeitos do Game Design seriam injetados aqui...
@@ -93,6 +95,24 @@ namespace GameCore.Systems
             {
                 Debug.LogWarning($"Efeito lógico do ID {idPoder} não registrado no motor do AbilitySystem.");
             }
+        }
+    }
+
+    public class DirectDamageEffect : IAbilityEffect
+    {
+        private readonly ElementType _elemento;
+
+        public DirectDamageEffect(ElementType elemento)
+        {
+            _elemento = elemento;
+        }
+
+        public void Aplicar(EnemyController alvo, Dictionary<string, float> parametros, MonoBehaviour contexto)
+        {
+            if (alvo == null) return;
+
+            float danoBase = parametros.ContainsKey("dano") ? parametros["dano"] : 20f;
+            alvo.ReceberDano(danoBase, _elemento);
         }
     }
 

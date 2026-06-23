@@ -27,6 +27,20 @@ Criar uma cena chamada `VerticalSlice.unity` com estes objetos:
 - `TowerDefenseEngine`
 - Canvas simples para botao de captura, timer, energia e lista de capturados.
 
+Atalho ja preparado:
+
+- No Unity, rode `Baluarte > Cenas > Criar Cena Inicial`.
+- Isso cria `Assets/_Project/Scenes/CenaInicial.unity` com os managers principais e a tela inicial.
+- Esse atalho tambem cria os dados de teste e conecta as habilidades/configuracao nos managers.
+- A tela inicial mostra a versao `0.0.0.3`, as atualizacoes, e leva para criacao de personagem quando nao existir perfil salvo.
+
+## Fluxo inicial do jogador
+
+- Se nao existir personagem salvo, o botao inicial abre a criacao.
+- A criacao permite escolher `Homem` ou `Mulher` por enquanto com visual padrao.
+- O personagem recebe status iniciais: Vigor, Foco, Empatia Animal, Sorte e Conhecimento Arcano.
+- Se ja existir personagem salvo, o botao inicial comeca a jornada diretamente.
+
 ## Passo 3: criar dados de teste
 
 Em `Assets/_Project/ScriptableObjects`, criar:
@@ -35,6 +49,15 @@ Em `Assets/_Project/ScriptableObjects`, criar:
 - 1 habilidade ativa de fogo.
 - 1 habilidade passiva de fogo.
 - 1 configuracao simples de tower defense.
+
+Atalho ja preparado:
+
+- No Unity, rode `Baluarte > Dados de Teste > Criar ou Atualizar`.
+- Isso cria/atualiza os assets de teste, o prefab de projetil, o prefab de inimigo e a config `ConfigTD_VerticalSlice`.
+- Depois, no objeto `AbilitySystem`, arraste as habilidades criadas para a lista `Banco De Dados Habilidades`.
+- No objeto `TowerDefenseEngine`, arraste `ConfigTD_VerticalSlice` para o campo `Config TD`.
+
+Se voce usar `Baluarte > Cenas > Criar Cena Inicial`, essas referencias ja sao conectadas automaticamente.
 
 ## Passo 4: fechar o loop jogavel
 
